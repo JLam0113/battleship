@@ -19,16 +19,21 @@ test('ship sunk', () => {
 
 const gameboardClass = require('./gameboard')
 
+test('gameboard', () => {
+    let gameboard = gameboardClass.Gameboard()
+    expect(gameboard.getBoard()[0][0]).toBe('')
+})
+
 test('ship placed', () => {
     let ship = shipClass.Ship(3)
     let gameboard = gameboardClass.Gameboard()
     gameboard.placeShip(ship, [[0,0],[0,1],[0,2]])
-    expect(gameboard.getShip(0, 0)).toBe(ship)
-    expect(gameboard.getShip(0, 1)).toBe(ship)
-    expect(gameboard.getShip(0, 2)).toBe(ship)
+    expect(gameboard.getBoard()[0][0]).toBe(ship)
+    expect(gameboard.getBoard()[0][1]).toBe(ship)
+    expect(gameboard.getBoard()[0][2]).toBe(ship)
 })
 
-test('ship hit', () => {
+test.only('ship hit', () => {
     let ship = shipClass.Ship(3)
     let gameboard = gameboardClass.Gameboard()
     gameboard.placeShip(ship, [[0,0],[0,1],[0,2]])
@@ -44,10 +49,10 @@ test('hit missed', () => {
     expect(gameboard.getBoard()[0, 0].toBe('X'))
 })
 
-test('all ships sunk'), () => {
+test('all ships sunk', () => {
     let ship = shipClass.Ship(1)
     let gameboard = gameboardClass.Gameboard()
     gameboard.placeShip(ship, [[0,0]])
     gameboard.receiveAttack(0, 0)
     expect(gameboard.gameOver()).toBe(true)
-}
+})
