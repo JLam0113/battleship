@@ -49,10 +49,14 @@ test('hit missed', () => {
     expect(gameboard.getBoard()[0][0]).toBe('X')
 })
 
-test.only('all ships sunk', () => {
+test('all ships sunk', () => {
     let ship = shipClass.Ship(1)
     let gameboard = gameboardClass.Gameboard()
     gameboard.placeShip(ship, [[0,0]])
+    let ship2 = shipClass.Ship(2)
+    gameboard.placeShip(ship2, [[5,5],[6,5]])
     gameboard.receiveAttack(0, 0)
+    gameboard.receiveAttack(5, 5)
+    gameboard.receiveAttack(6, 5)
     expect(gameboard.gameOver()).toBe(true)
 })

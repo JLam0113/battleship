@@ -4,6 +4,7 @@ function Gameboard() {
     const rows = 10;
     const columns = 10;
     const board = [];
+    const ships = [];
 
     const newBoard = () => {
         for (let i = 0; i < rows; i++) {
@@ -27,6 +28,7 @@ function Gameboard() {
         coordinates.map((array) => {
             board[array[0]][array[1]] = ship
         })
+        ships.push(ship)
     }
 
     const receiveAttack = (row, column) => {
@@ -40,10 +42,13 @@ function Gameboard() {
     }
 
     const gameOver = () => {
-        
+        for ( ship of ships ) {
+            if(!ship.isSunk()) return false;
+        }
+        return true;
     }
 
-    return { getBoard, placeShip, receiveAttack };
+    return { getBoard, placeShip, receiveAttack, gameOver };
 
 }
 
