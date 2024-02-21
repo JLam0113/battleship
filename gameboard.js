@@ -1,5 +1,3 @@
-const shipClass = require('./ship')
-
 function Gameboard() {
     const rows = 10;
     const columns = 10;
@@ -22,7 +20,7 @@ function Gameboard() {
     const placeShip = (ship, coordinates) => {
         // Check if coordinates are empty
         coordinates.map((array) => {
-            if(board[array[0]][array[1]] !== '') return
+            if (board[array[0]][array[1]] !== '') return
         })
 
         coordinates.map((array) => {
@@ -32,7 +30,7 @@ function Gameboard() {
     }
 
     const receiveAttack = (row, column) => {
-        if (board[row][column] == 'X' || board[row][column] == '' ) {
+        if (board[row][column] == 'X' || board[row][column] == '') {
             board[row][column] = 'X'
         }
         else {
@@ -42,13 +40,13 @@ function Gameboard() {
     }
 
     const gameOver = () => {
-        for ( ship of ships ) {
-            if(!ship.isSunk()) return false;
+        for (ship of ships) {
+            if (!ship.isSunk()) return false;
         }
         return true;
     }
 
-    return { getBoard, placeShip, receiveAttack, gameOver };
+    return { getBoard, newBoard, placeShip, receiveAttack, gameOver };
 
 }
 

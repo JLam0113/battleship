@@ -60,3 +60,22 @@ test('all ships sunk', () => {
     gameboard.receiveAttack(6, 5)
     expect(gameboard.gameOver()).toBe(true)
 })
+
+const gamecontrollerClass = require('./gamecontroller')
+
+test('player turn', () => {
+    let gamecontroller = gamecontrollerClass.GameController()
+    gamecontroller.playRound(0,0)
+    expect(gamecontroller.getAIBoard()[0][0]).toBe('O')
+})
+
+test.only('game loop', () => {
+    let gamecontroller = gamecontrollerClass.GameController()
+    gamecontroller.playRound(0,0)
+    gamecontroller.playRound(1,0)
+    expect(gamecontroller.getAIBoard()[1][0]).toBe('O')
+    gamecontroller.playRound(9,7)
+    gamecontroller.playRound(9,8)
+    gamecontroller.playRound(9,9)
+    expect(gamecontroller.getAIBoard()[0][0]).toBe('')
+})
