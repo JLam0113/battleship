@@ -30,7 +30,17 @@ function Gameboard() {
     }
 
     const receiveAttack = (row, column) => {
+        if (board[row][column] == 'X' || board[row][column] == '' ) {
+            board[row][column] = 'X'
+        }
+        else {
+            board[row][column].hit()
+            board[row][column] = 'O'
+        }
+    }
 
+    const gameOver = () => {
+        
     }
 
     return { getBoard, placeShip, receiveAttack };
