@@ -69,7 +69,7 @@ test('player turn', () => {
     expect(gamecontroller.getAIBoard()[0][0]).toBe('O')
 })
 
-test.only('game loop', () => {
+test('game loop', () => {
     let gamecontroller = gamecontrollerClass.GameController()
     gamecontroller.playRound(0,0)
     gamecontroller.playRound(1,0)

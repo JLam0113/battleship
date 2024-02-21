@@ -19,7 +19,7 @@ function GameController() {
         players[0].board.placeShip(shipClass.Ship(3), [[8, 5], [8, 6], [8, 7]])
         players[0].board.placeShip(shipClass.Ship(2), [[3, 2], [4, 2]])
         players[1].board.placeShip(shipClass.Ship(2), [[0, 0], [1, 0]])
-        players[1].board.placeShip(shipClass.Ship(3), [[9, 7], [9, 8],[9, 9]])
+        players[1].board.placeShip(shipClass.Ship(3), [[9, 7], [9, 8], [9, 9]])
     }
 
     generateShips()
@@ -27,9 +27,10 @@ function GameController() {
     const playAI = () => {
         let row = Math.floor(Math.random() * 10)
         let column = Math.floor(Math.random() * 10)
-        if(players[1].moves.indexOf([row, column]) < 0) {
+        if (players[1].moves.indexOf([row, column]) < 0) {
             players[1].moves.push([row, column])
             players[0].board.receiveAttack(row, column)
+            playAI()
             return
         }
         else {
@@ -38,15 +39,19 @@ function GameController() {
     }
 
     const playRound = (row, column) => {
-        players[1].board.receiveAttack(row, column)
-        if(players[1].board.gameOver()){
-            resetGame()
+        if (players[1].board.receiveAttack(row, column)) {
+            if (players[1].board.gameOver()) {
+                resetGame()
+                return
+            }
             return
         }
-        playAI()
-        if(players[0].board.gameOver()){
-            resetGame()
-            return
+        else {
+            playAI()
+            if (players[0].board.gameOver()) {
+                resetGame()
+                return
+            }
         }
     }
 
